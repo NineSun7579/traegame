@@ -80,6 +80,80 @@
     }
 
     /* ============================================
+       LIGHT MODE THEME
+       ============================================ */
+    body.light-mode {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f1f5f9;
+      --bg-surface: #f1f5f9;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --text-accent: #e11d48;
+      --border-color: rgba(0, 0, 0, 0.08);
+      --border-color-light: rgba(0, 0, 0, 0.12);
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --shadow-glow-coral: 0 0 20px rgba(255, 107, 107, 0.15);
+      --shadow-glow-sky: 0 0 20px rgba(56, 189, 248, 0.15);
+    }
+
+    /* Light mode specific overrides */
+    body.light-mode .sidebar {
+      background: #ffffff;
+      border-right: 1px solid rgba(0,0,0,0.06);
+    }
+    body.light-mode .header {
+      background: rgba(255,255,255,0.85);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    body.light-mode .nav-item:hover {
+      background: rgba(0,0,0,0.04);
+    }
+    body.light-mode .nav-item.active {
+      background: rgba(255,107,107,0.08);
+    }
+    body.light-mode .welcome-banner {
+      background: linear-gradient(135deg, #ff6b6b 0%, #fbbf24 50%, #38bdf8 100%) !important;
+    }
+    body.light-mode .welcome-banner .welcome-greeting,
+    body.light-mode .welcome-banner .welcome-title,
+    body.light-mode .welcome-banner .welcome-subtitle {
+      color: white !important;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    body.light-mode .modal-overlay {
+      background: rgba(0,0,0,0.3);
+    }
+    body.light-mode .toast-container .toast {
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    body.light-mode input, body.light-mode textarea {
+      background: var(--bg-surface) !important;
+      border-color: var(--border-color-light) !important;
+      color: var(--text-primary) !important;
+    }
+    body.light-mode option {
+      background: #ffffff;
+      color: #0f172a;
+    }
+    body.light-mode .action-btn {
+      background: var(--bg-surface);
+      border-color: var(--border-color-light);
+    }
+    body.light-mode .action-btn:hover {
+      background: #e2e8f0;
+    }
+    body.light-mode .search-input {
+      background: var(--bg-surface) !important;
+      border-color: var(--border-color-light) !important;
+    }
+
+    /* ============================================
        RESET & BASE STYLES
        ============================================ */
     *, *::before, *::after {
@@ -100,6 +174,7 @@
       line-height: 1.6;
       overflow-x: hidden;
       min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     /* ============================================
@@ -425,16 +500,37 @@
       border-color: rgba(255,107,107,0.5);
       box-shadow: 0 0 0 3px rgba(255,107,107,0.1);
     }
-    .form-select {
+    .form-select, .select-styled {
       width: 100%;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color-light);
       border-radius: 8px;
       padding: 10px 14px;
-      color: #f1f5f9;
+      color: var(--text-primary);
       font-size: 13px;
       outline: none;
       box-sizing: border-box;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2716%27%20height%3D%2716%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%2394a3b8%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpolyline%20points%3D%276%209%2012%2015%2018%209%27%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      padding-right: 32px;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-select option, .select-styled option {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      padding: 8px;
+    }
+    .form-select:focus, .select-styled:focus {
+      border-color: var(--accent-coral);
+      box-shadow: 0 0 0 3px rgba(255,107,107,0.1);
+    }
+    .select-styled {
+      width: auto;
+      min-width: 120px;
     }
 
     .nav-item {
@@ -1440,98 +1536,6 @@
       }
     }
 
-    /* ============================================
-       MODAL STYLES
-       ============================================ */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(4px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition: all var(--transition-normal);
-    }
-
-    .modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-    }
-
-    .modal {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color-light);
-      border-radius: var(--radius-xl);
-      width: 90%;
-      max-width: 560px;
-      max-height: 90vh;
-      overflow: hidden;
-      transform: scale(0.9) translateY(20px);
-      transition: transform var(--transition-normal);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .modal-overlay.active .modal {
-      transform: scale(1) translateY(0);
-    }
-
-    .modal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 24px 28px;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .modal-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .modal-close {
-      width: 36px;
-      height: 36px;
-      border-radius: var(--radius-sm);
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all var(--transition-fast);
-    }
-
-    .modal-close:hover {
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text-primary);
-    }
-
-    .modal-body {
-      padding: 28px;
-      overflow-y: auto;
-      max-height: calc(90vh - 140px);
-    }
-
-    .modal-footer {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 12px;
-      padding: 20px 28px;
-      border-top: 1px solid var(--border-color);
-    }
-
     /* Form Styles */
     .form-group {
       margin-bottom: 20px;
@@ -1562,25 +1566,7 @@
       box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
     }
 
-    .form-select {
-      width: 100%;
-      padding: 12px 16px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      color: var(--text-primary);
-      font-size: 14px;
-      cursor: pointer;
-      outline: none;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 12px center;
-    }
-
-    .form-select:focus {
-      border-color: var(--accent-coral);
-    }
+    /* .form-select defined above with select-styled */
 
     .form-textarea {
       width: 100%;
@@ -2318,6 +2304,9 @@
             <button class="action-btn" title="帮助" onclick="showToast('info', '帮助', '查看文档或联系技术支持')">
               <i data-lucide="help-circle" style="width:18px;height:18px"></i>
             </button>
+            <button class="action-btn" id="themeToggle" title="切换主题" onclick="toggleTheme()">
+              <i data-lucide="sun" style="width:18px;height:18px" id="themeIcon"></i>
+            </button>
             <div class="dropdown" style="position:relative">
               <button class="action-btn" title="用户" onclick="toggleUserDropdown(event)" style="background:var(--gradient-primary);border:none;">
                 <span style="font-size:14px;font-weight:600;color:white">张</span>
@@ -2921,13 +2910,13 @@
           <div style="background:var(--bg-secondary);border-radius:var(--radius-lg);padding:20px 24px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;border:1px solid rgba(255,255,255,0.05);">
             <div style="display:flex;gap:12px;align-items:center;">
               <input type="text" placeholder="搜索课程名称..." style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 14px;color:var(--text-primary);font-size:13px;width:220px;outline:none;" oninput="filterCourses(this.value)">
-              <select style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 12px;color:var(--text-primary);font-size:13px;" onchange="filterCourseLevel(this.value)">
+              <select class="select-styled" onchange="filterCourseLevel(this.value)">
                 <option value="">全部级别</option>
                 <option value="入门">入门</option>
                 <option value="进阶">进阶</option>
                 <option value="高级">高级</option>
               </select>
-              <select style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 12px;color:var(--text-primary);font-size:13px;" onchange="filterCourseStatus(this.value)">
+              <select class="select-styled" onchange="filterCourseStatus(this.value)">
                 <option value="">全部状态</option>
                 <option value="进行中">进行中</option>
                 <option value="待开课">待开课</option>
@@ -3003,7 +2992,7 @@
           <div style="background:var(--bg-secondary);border-radius:var(--radius-lg);padding:20px 24px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;border:1px solid rgba(255,255,255,0.05);">
             <div style="display:flex;gap:12px;align-items:center;">
               <input type="text" placeholder="搜索学员姓名..." style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 14px;color:var(--text-primary);font-size:13px;width:220px;outline:none;" oninput="filterStudents(this.value)">
-              <select style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 12px;color:var(--text-primary);font-size:13px;">
+              <select class="select-styled">
                 <option value="">全部班级</option>
                 <option value="启蒙1班">启蒙1班</option>
                 <option value="基础2班">基础2班</option>
@@ -3011,8 +3000,8 @@
               </select>
             </div>
             <div style="display:flex;gap:10px;">
-              <button onclick="showToast('info','导出','学员数据导出中...')" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--text-secondary);padding:8px 16px;border-radius:8px;font-size:13px;cursor:pointer;">📥 导出</button>
-              <button onclick="showToast('success','操作','添加新学员')" style="background:linear-gradient(135deg,#38bdf8,#0ea5e9);color:white;border:none;padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">＋ 添加学员</button>
+              <button onclick="exportStudents()" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--text-secondary);padding:8px 16px;border-radius:8px;font-size:13px;cursor:pointer;">📥 导出</button>
+              <button onclick="openStudentModal()" style="background:linear-gradient(135deg,#38bdf8,#0ea5e9);color:white;border:none;padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">＋ 添加学员</button>
             </div>
           </div>
 
@@ -3080,7 +3069,7 @@
           <div style="background:var(--bg-secondary);border-radius:var(--radius-lg);padding:20px 24px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;border:1px solid rgba(255,255,255,0.05);">
             <div style="display:flex;gap:12px;align-items:center;">
               <input type="text" placeholder="搜索设备编号..." style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 14px;color:var(--text-primary);font-size:13px;width:220px;outline:none;">
-              <select style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 12px;color:var(--text-primary);font-size:13px;">
+              <select class="select-styled">
                 <option value="">全部状态</option>
                 <option value="在线">在线</option>
                 <option value="离线">离线</option>
@@ -3359,7 +3348,7 @@
                   </div>
                   <div>
                     <label style="display:block;color:var(--text-muted);font-size:12px;margin-bottom:6px;font-weight:600;">时区设置</label>
-                    <select style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:10px 14px;color:var(--text-primary);font-size:13px;outline:none;box-sizing:border-box;">
+                    <select class="form-select">
                       <option>Asia/Shanghai (UTC+8)</option>
                       <option>America/New_York (UTC-5)</option>
                       <option>Europe/London (UTC+0)</option>
@@ -3565,13 +3554,106 @@
           <td style="padding:14px 20px;text-align:center;"><span style="color:#f59e0b;font-weight:600;font-size:13px;">⭐ ${s.score}</span></td>
           <td style="padding:14px 20px;"><div style="display:flex;align-items:center;gap:8px;"><div style="flex:1;height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;"><div style="height:100%;width:${s.progress}%;background:${s.progress>=80?'#34d399':s.progress>=50?'#38bdf8':'#f59e0b'};border-radius:3px;"></div></div><span style="color:var(--text-muted);font-size:12px;">${s.progress}%</span></div></td>
           <td style="padding:14px 20px;"><span style="color:${statusColors[s.status]};font-size:12px;display:flex;align-items:center;gap:6px;"><span style="width:6px;height:6px;border-radius:50%;background:${statusColors[s.status]};"></span>${s.status}</span></td>
-          <td style="padding:14px 20px;text-align:center;"><button onclick="showToast('info','学员','查看 ${s.name} 详情')" style="background:rgba(56,189,248,0.1);color:#38bdf8;border:none;padding:5px 12px;border-radius:6px;font-size:11px;cursor:pointer;">详情</button></td>
+          <td style="padding:14px 20px;text-align:center;"><button onclick="editStudent(${i})" style="background:rgba(56,189,248,0.1);color:#38bdf8;border:none;padding:5px 12px;border-radius:6px;font-size:11px;cursor:pointer;">编辑</button></td>
         </tr>
       `).join('');
     }
     function filterStudents(query) {
       const filtered = allStudents.filter(s => s.name.includes(query) || s.course.includes(query));
       renderStudentList(filtered);
+    }
+
+    // Student Modal Functions
+    let editingStudentIndex = -1;
+    
+    function openStudentModal() {
+      editingStudentIndex = -1;
+      document.getElementById('studentModal').classList.add('active');
+      document.getElementById('studentModalTitle').textContent = '🎓 添加学员';
+      document.getElementById('studentName').value = '';
+      document.getElementById('studentAge').value = '';
+      document.getElementById('studentClass').value = '启蒙1班';
+      document.getElementById('studentCourse').value = '认识编程';
+      document.getElementById('studentPhone').value = '';
+    }
+    
+    function closeStudentModal() {
+      document.getElementById('studentModal').classList.remove('active');
+    }
+    
+    function editStudent(index) {
+      editingStudentIndex = index;
+      const student = allStudents[index];
+      document.getElementById('studentModal').classList.add('active');
+      document.getElementById('studentModalTitle').textContent = '📝 编辑学员';
+      document.getElementById('studentName').value = student.name;
+      document.getElementById('studentAge').value = student.age;
+      document.getElementById('studentClass').value = student.cls;
+      document.getElementById('studentCourse').value = student.course;
+      document.getElementById('studentPhone').value = '';
+    }
+    
+    function submitStudent() {
+      const name = document.getElementById('studentName').value.trim();
+      const age = document.getElementById('studentAge').value;
+      const cls = document.getElementById('studentClass').value;
+      const course = document.getElementById('studentCourse').value;
+      
+      if (!name) {
+        showToast('warning', '提示', '请输入学员姓名');
+        return;
+      }
+      
+      if (!age) {
+        showToast('warning', '提示', '请输入学员年龄');
+        return;
+      }
+      
+      if (editingStudentIndex >= 0) {
+        // Update existing student
+        allStudents[editingStudentIndex].name = name;
+        allStudents[editingStudentIndex].age = parseInt(age);
+        allStudents[editingStudentIndex].cls = cls;
+        allStudents[editingStudentIndex].course = course;
+        allStudents[editingStudentIndex].avatar = name.charAt(0);
+        showToast('success', '更新成功', `学员「${name}」的信息已更新`);
+      } else {
+        // Add new student
+        const colors = ['#ff6b6b','#38bdf8','#34d399','#a78bfa','#f59e0b','#06b6d4','#84cc16','#e879f9'];
+        allStudents.push({
+          name: name,
+          avatar: name.charAt(0),
+          age: parseInt(age),
+          cls: cls,
+          course: course,
+          score: 0,
+          progress: 0,
+          status: '活跃',
+          color: colors[Math.floor(Math.random() * colors.length)]
+        });
+        showToast('success', '添加成功', `学员「${name}」已成功添加`);
+      }
+      
+      renderStudentList(allStudents);
+      closeStudentModal();
+      editingStudentIndex = -1;
+    }
+    
+    function exportStudents() {
+      // Create CSV content
+      let csv = '学员,年龄,班级,当前课程,积分,进度,状态\n';
+      allStudents.forEach(s => {
+        csv += `${s.name},${s.age},${s.cls},${s.course},${s.score},${s.progress}%,${s.status}\n`;
+      });
+      
+      // Create download link
+      const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `学员数据_${new Date().toISOString().slice(0, 10)}.csv`;
+      link.click();
+      
+      showToast('success', '导出成功', `已导出 ${allStudents.length} 条学员数据`);
     }
 
     // ============================================
@@ -4667,6 +4749,31 @@
     });
 
     // ============================================
+    // THEME TOGGLE (Light / Dark mode)
+    // ============================================
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+      const isLight = document.body.classList.contains('light-mode');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      updateThemeIcon(isLight);
+    }
+    function updateThemeIcon(isLight) {
+      const icon = document.getElementById('themeIcon');
+      if (icon) {
+        icon.setAttribute('data-lucide', isLight ? 'moon' : 'sun');
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+      }
+    }
+    // Restore saved theme on load
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'light') {
+        document.body.classList.add('light-mode');
+        updateThemeIcon(true);
+      }
+    })();
+
+    // ============================================
     // INITIALIZATION
     // ============================================
     // Set initial active chart button
@@ -4726,6 +4833,57 @@
       <div class="modal-footer">
         <button onclick="closeNewCourseModal()" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#94a3b8;padding:10px 24px;border-radius:8px;font-size:13px;cursor:pointer;">取消</button>
         <button onclick="submitNewCourse()" class="btn-animated" style="background:linear-gradient(135deg,#ff6b6b,#ee5a24);color:white;border:none;padding:10px 28px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">创建课程</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Student Modal -->
+  <div id="studentModal" class="modal-overlay" onclick="if(event.target===this)closeStudentModal()">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="studentModalTitle">🎓 添加学员</h3>
+        <button class="modal-close" onclick="closeStudentModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>学员姓名</label>
+          <input id="studentName" type="text" class="form-input" placeholder="请输入学员姓名">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div class="form-group">
+            <label>年龄</label>
+            <input id="studentAge" type="number" class="form-input" placeholder="例如：5" min="3" max="12">
+          </div>
+          <div class="form-group">
+            <label>班级</label>
+            <select id="studentClass" class="form-select">
+              <option value="启蒙1班">启蒙1班</option>
+              <option value="基础2班">基础2班</option>
+              <option value="进阶1班">进阶1班</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>当前课程</label>
+          <select id="studentCourse" class="form-select">
+            <option value="认识编程">认识编程</option>
+            <option value="方向认知">方向认知</option>
+            <option value="循环魔法">循环魔法</option>
+            <option value="LED灯光秀">LED灯光秀</option>
+            <option value="智能避障小车">智能避障小车</option>
+            <option value="声音编程">声音编程</option>
+            <option value="条件判断">条件判断</option>
+            <option value="温度传感器">温度传感器</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>家长联系方式</label>
+          <input id="studentPhone" type="text" class="form-input" placeholder="请输入家长手机号">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button onclick="closeStudentModal()" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#94a3b8;padding:10px 24px;border-radius:8px;font-size:13px;cursor:pointer;">取消</button>
+        <button onclick="submitStudent()" class="btn-animated" style="background:linear-gradient(135deg,#38bdf8,#0ea5e9);color:white;border:none;padding:10px 28px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">保存</button>
       </div>
     </div>
   </div>
